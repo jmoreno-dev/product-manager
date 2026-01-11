@@ -1,4 +1,4 @@
-<div class="container">
+<section class="container">
     <header class="header">
         <h1>Product Manager</h1>
         <button class="btn btn-primary" (click)="openForm()">Add New Product</button>
@@ -13,7 +13,7 @@
     }
 
     <!-- Product List -->
-    <div class="products-section">
+    <section class="products-section">
         @if (products().length > 0) {
         <table class="table">
             <thead>
@@ -32,7 +32,7 @@
                     <td>{{ product.id }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
-                    <td>${{ product.price.toFixed(2) }}</td>
+                    <td>{{ product.price.toFixed(2) }}€</td>
                     <td>{{ product.quantity }}</td>
                     <td class="actions">
                         <button class="btn btn-edit" (click)="openForm(product)">Edit</button>
@@ -45,32 +45,32 @@
         } @else {
         <p class="empty-message">No products found. Create one to get started!</p>
         }
-    </div>
+    </section>
 
     <!-- Form Modal -->
     @if (showForm()) {
-    <div class="modal-overlay" (click)="closeForm()">
+    <article class="modal-overlay" (click)="closeForm()">
         <div class="modal" (click)="$event.stopPropagation()">
-            <div class="modal-header">
+            <header class="modal-header">
                 <h2>{{ selectedProduct() ? 'Edit Product' : 'Create New Product' }}</h2>
                 <button class="close-btn" (click)="closeForm()">✕</button>
-            </div>
+            </header>
 
-            <div class="modal-body">
-                <div class="form-group">
+            <body class="modal-body">
+                <section class="form-group">
                     <label for="name">Product Name *</label>
                     <input #nameInput id="name" type="text" class="form-input" [value]="formData().name"
                         (change)="updateFormData('name', nameInput.value)" placeholder="Enter product name" />
-                </div>
+                </section>
 
-                <div class="form-group">
+                <section class="form-group">
                     <label for="description">Description</label>
                     <textarea #descInput id="description" class="form-input" [value]="formData().description"
                         (change)="updateFormData('description', descInput.value)"
                         placeholder="Enter product description" rows="3"></textarea>
-                </div>
+                </section>
 
-                <div class="form-row">
+                <section class="form-row">
                     <div class="form-group">
                         <label for="price">Price *</label>
                         <input #priceInput id="price" type="number" class="form-input" [value]="formData().price"
@@ -78,21 +78,21 @@
                             min="0" />
                     </div>
 
-                    <div class="form-group">
+                    <section class="form-group">
                         <label for="quantity">Quantity *</label>
                         <input #qtyInput id="quantity" type="number" class="form-input" [value]="formData().quantity"
                             (change)="updateFormData('quantity', qtyInput.value)" placeholder="0" min="0" />
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </section>
+            </body>
 
-            <div class="modal-footer">
+            <footer class="modal-footer">
                 <button class="btn btn-secondary" (click)="closeForm()">Cancel</button>
                 <button class="btn btn-primary" (click)="saveProduct()" [disabled]="loading()">
                     {{ loading() ? 'Saving...' : 'Save Product' }}
                 </button>
-            </div>
+            </footer>
         </div>
-    </div>
+    </article>
     }
-</div>
+</section>
