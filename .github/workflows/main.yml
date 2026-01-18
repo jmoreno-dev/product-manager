@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  # Tarea 1: Validar el Backend (Spring Boot)
+ # Tarea 1: Validar el Backend (Spring Boot)
   backend-build:
     runs-on: ubuntu-latest
     steps:
@@ -48,3 +48,14 @@ jobs:
         run: |
           cd frontend
           npm run build -- --configuration production
+          
+ # Tarea de Despliegue Continuo (CD)
+  deploy:
+    name: Deploy to Production
+    needs: [backend-build, frontend-build] # Solo si los builds anteriores tienen éxito
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Call Render Deploy Hook
+        run: |
+          curl -f ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
