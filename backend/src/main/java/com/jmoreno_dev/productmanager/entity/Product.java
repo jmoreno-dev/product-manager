@@ -1,9 +1,13 @@
 package com.jmoreno_dev.productmanager.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table (name = "products")
 public class Product {
@@ -24,14 +28,4 @@ public class Product {
     @Column (name = "quantity", nullable = false)
     private Integer quantity;
 
-    public Product() {
-    }
-
-    public Product(Long id, String name, String description, Double price, Integer quantity) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
-    }
 }
