@@ -1,6 +1,7 @@
 package com.jmoreno_dev.productmanager.service;
 
 import com.jmoreno_dev.productmanager.entity.Product;
+import com.jmoreno_dev.productmanager.exceptions.InvalidProductException;
 import com.jmoreno_dev.productmanager.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ public class ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
-    public Product saveOrUpdateProduct(Product product) {
+    public Product saveOrUpdateProduct(Product product) throws InvalidProductException {
+        ProductValidator.validateProduct(product);
         return productRepository.save(product);
     }
 
