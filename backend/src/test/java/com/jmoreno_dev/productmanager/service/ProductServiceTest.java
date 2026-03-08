@@ -1,6 +1,7 @@
 package com.jmoreno_dev.productmanager.service;
 
 import com.jmoreno_dev.productmanager.entity.Product;
+import com.jmoreno_dev.productmanager.exceptions.InvalidProductException;
 import com.jmoreno_dev.productmanager.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class ProductServiceTest {
     private ProductRepository productRepository;
 
     @Test
-    void testSaveProduct() {
+    void testSaveProduct() throws InvalidProductException {
         Product validProduct = new Product(null, "Laptop", "High-end gaming laptop", 1500.00, 9);
         Product savedProduct = productService.saveOrUpdateProduct(validProduct);
         assertNotNull (savedProduct.getId(), "Saved product should have an ID");
