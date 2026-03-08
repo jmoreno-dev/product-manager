@@ -9,6 +9,7 @@ public class ProductMapper {
     public static ProductDTO toDTO(Product product) {
         if (product == null) return null;
         return new ProductDTO(
+                product.getId(),
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
