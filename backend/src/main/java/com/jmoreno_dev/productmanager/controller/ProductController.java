@@ -1,6 +1,7 @@
 package com.jmoreno_dev.productmanager.controller;
 
 import com.jmoreno_dev.productmanager.entity.Product;
+import com.jmoreno_dev.productmanager.exceptions.InvalidProductException;
 import com.jmoreno_dev.productmanager.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,13 +31,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws InvalidProductException {
         Product created = productService.saveOrUpdateProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) throws InvalidProductException {
         Product existing = productService.getProductById(id);
         if (existing == null) return ResponseEntity.notFound().build();
         // preserve id and save
