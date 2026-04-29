@@ -1,9 +1,6 @@
 package com.jmoreno_dev.productmanager;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
 class ProductmanagerApplicationTests {
 
 	@Test
